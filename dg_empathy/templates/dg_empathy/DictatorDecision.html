@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% block content %}
+
+<h2>Decision</h2>
+
+{% if player.receiver_gender == 'woman' %}
+  <p>The recipient is a <strong>woman</strong>.</p>
+{% elif player.receiver_gender == 'man' %}
+  <p>The recipient is a <strong>man</strong>.</p>
+{% else %}
+  <p>No information about the recipient is provided.</p>
+{% endif %}
+
+<p>You have <strong>{{ Constants.endowment }}</strong> tokens.</p>
+
+<div style="margin: 20px 0;">
+  <label for="donation_slider">
+    You give: <strong><span id="donation_value">0</span></strong> tokens
+  </label>
+
+  <input
+    type="range"
+    id="donation_slider"
+    name="donation"
+    min="0"
+    max="{{ Constants.endowment }}"
+    value="0"
+    step="1"
+    style="width: 100%;"
+    oninput="document.getElementById('donation_value').textContent = this.value;"
+  >
+</div>
+
+{% next_button %}
+
+{% endblock %}

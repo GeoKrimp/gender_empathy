@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% block content %}
+
+<h2>Instructions</h2>
+
+<p>
+You will participate in a short decision-making task.
+You will receive an initial endowment of {{ Constants.endowment }} tokens.
+You may decide how many tokens, if any, to give to another participant.
+</p>
+
+<p>
+Your decisions are anonymous and will affect real payments.
+</p>
+
+{% next_button %}
+
+{% endblock %}
