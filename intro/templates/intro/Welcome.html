@@ -1,0 +1,128 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}Welcome to the Study{% endblock %}
+
+{% block content %}
+
+<style>
+  .welcome-wrap{
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .welcome-card{
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 12px 30px rgba(15,23,42,0.12);
+    border: 1px solid #e5e7eb;
+  }
+
+  /* LOGO STRIP */
+  .welcome-logos{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   /* ένα αριστερά, ένα δεξιά */
+    margin-bottom: 18px;
+  }
+  .welcome-logos img{
+    height: 100px;
+    object-fit: contain;
+  }
+  .welcome-logos-divider{
+    font-size: 1.4rem;
+    color: #9ca3af;
+    font-weight: 500;
+    margin: 0 10px;
+  }
+
+  .welcome-card h2{
+    margin-top: 0.2rem;
+    margin-bottom: 0.4rem;
+  }
+  .welcome-subtitle{
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin-bottom: 1.2rem;
+  }
+  .welcome-card h3{
+    margin-top: 1.4rem;
+    margin-bottom: 0.4rem;
+    font-size: 1.05rem;
+  }
+  .welcome-card p{
+    margin-bottom: 0.55rem;
+  }
+  .welcome-list{
+    margin: 0.4rem 0 0.8rem 1.2rem;
+    padding: 0;
+  }
+  .welcome-list li{
+    margin-bottom: 0.25rem;
+  }
+  .welcome-meta{
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+  }
+</style>
+
+<div class="welcome-wrap">
+  <div class="welcome-card">
+
+    <!-- Λογότυπα: ένα αριστερά, ένα δεξιά -->
+    <div class="welcome-logos">
+      <img src="/static/intro/University-of-Oulu.png" alt="University of Oulu logo">
+      <span class="welcome-logos-divider"></span>
+      <img src="/static/intro/upatras_logo.png" alt="University of Patras logo">
+    </div>
+
+    <h2>Welcome to the Study!</h2>
+    <div class="welcome-subtitle">
+      University of Oulu, Behavioural and Experimental Economics Lab &amp;<br>University of Patras
+    </div>
+
+    <p>
+      Thank you for your interest in participating in our study.
+      This research is being conducted by the University of Oulu and the University of Patras
+      and aims to better understand altruistic behavior between genders.
+        Your participation is valuable and will contribute to advancing
+      knowledge in the fields of behavioral and experimental economics.
+    </p>
+
+    <h3>What to Expect</h3>
+    <p>
+      The study consists of some economic games. It should take approximately
+      <b>5 minutes</b> to complete.
+    </p>
+
+    <p>Please note:</p>
+    <ul class="welcome-list">
+      <li>All responses will be kept anonymous and confidential.</li>
+      <li>You may withdraw from the study at any time without providing a reason.</li>
+      <li>You will receive compensation in accordance with the instructions provided.</li>
+    </ul>
+
+    <h3>Before You Begin</h3>
+    <p>
+      Please ensure you are in a quiet environment where you can focus without interruptions.
+      Read all instructions carefully, and feel free to take your time with each task.
+    </p>
+
+    <p class="welcome-meta">
+      By clicking <b>"Next"</b> below, you confirm that you have read and understood the
+      information above and agree to participate in this study.
+    </p>
+
+    <p style="margin-top: 1.5rem;">
+      Thank you once again for your time and contribution!
+    </p>
+
+    <p>
+      {{ next_button }}
+    </p>
+
+  </div>
+</div>
+
+{% endblock %}

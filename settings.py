@@ -7,6 +7,22 @@ SESSION_CONFIGS = [
         app_sequence=['dg_empathy'],
         num_demo_participants=9,
     ),
+    dict(
+        name='intro',
+        display_name='Intro',
+        num_demo_participants=1,
+        app_sequence=[
+            'intro',  # 1) Survey (όλα τα ερωτηματολόγια)
+        ],
+    ),
+    dict(
+        name='multi_survey',
+        display_name='Survey',
+        num_demo_participants=1,
+        app_sequence=[
+            'multi_survey',  # 1) Survey (όλα τα ερωτηματολόγια)
+        ],
+    ),
 ]
 
 

@@ -1,17 +1,61 @@
 {% extends "global/Page.html" %}
 {% block content %}
-
+<style>
+  .exp-card{
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(15,23,42,.08);
+    padding: 24px 28px;
+  }
+</style>
+    <div class="exp-card">
 <h2>Decision</h2>
 
-{% if player.receiver_gender == 'woman' %}
-  <p>The recipient is a <strong>woman</strong>.</p>
-{% elif player.receiver_gender == 'man' %}
-  <p>The recipient is a <strong>man</strong>.</p>
+{# --- Πληροφορία για τον αποδέκτη ανά treatment --- #}
+
+{% if player.empathy_condition == 'no_empathy' %}
+
+  <p>
+    You are paired with another participant who will be the recipient
+    of your decision.
+  </p>
+
 {% else %}
-  <p>No information about the recipient is provided.</p>
+
+  {% if player.receiver_gender == 'man' %}
+    <p>
+      You are paired with another participant.
+      The other participant is a <strong>man</strong> and will be the
+      recipient of your decision.
+    </p>
+  {% elif player.receiver_gender == 'woman' %}
+    <p>
+      You are paired with another participant.
+      The other participant is a <strong>woman</strong> and will be the
+      recipient of your decision.
+    </p>
+  {% else %}
+    {# Αν για κάποιο λόγο δεν έχεις setάρει gender, απλά δεν το αναφέρουμε #}
+    <p>
+      You are paired with another participant who will be the recipient
+      of your decision.
+    </p>
+  {% endif %}
+
 {% endif %}
 
-<p>You have <strong>{{ Constants.endowment }}</strong> tokens.</p>
+<p>
+  You have <strong>{{ Constants.endowment }}</strong> tokens.
+  You can decide how many of these tokens to keep for yourself and
+  how many to give to the recipient.
+</p>
+
+<p>
+  Any tokens you give will be transferred to the recipient.
+  Any tokens you keep will remain yours.
+</p>
 
 <div style="margin: 20px 0;">
   <label for="donation_slider">
@@ -32,5 +76,6 @@
 </div>
 
 {% next_button %}
-
+    </div>
 {% endblock %}
+

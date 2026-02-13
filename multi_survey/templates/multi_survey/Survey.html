@@ -1,0 +1,73 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+<style>
+.progress {
+    height: 1.5rem;
+    background: #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    border-radius: 12px 0 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: width 0.6s ease;
+}
+.q-label { font-weight: 500; }
+</style>
+
+<div class="progress">
+  <div class="progress-bar" style="width: {{ progress }}%;">
+    Step {{ step }} of {{ steps_total }}
+  </div>
+</div>
+
+{% if items %}
+  <table class="table">
+    {% for it in items %}
+      <tr>
+        <td class="q-label">{{ it.question }}</td>
+        <td>
+          {# Αν υπάρχουν options -> dropdown, αλλιώς free text/number #}
+          {% if it.options %}
+            <select class="form-select" name="{{ it.field }}" required>
+              <option value="" selected>--------</option>
+              {% for opt in it.options %}
+                <option value="{{ opt }}">{{ opt }}</option>
+              {% endfor %}
+            </select>
+          {% else %}
+            {# Π.χ. "What is your age?" χωρίς options -> ελεύθερο αριθμητικό πεδίο #}
+            <input type="number"
+                   name="{{ it.field }}"
+                   class="form-control"
+                   min="18"
+                   max="80"
+                   placeholder="Enter your age (18–80)"
+                   required>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  <p>{{ next_button }}</p>
+{% else %}
+  <div class="alert alert-warning">
+    No items found in this questionnaire CSV.
+  </div>
+  <p>{{ next_button }}</p>
+{% endif %}
+
+{% endblock %}
