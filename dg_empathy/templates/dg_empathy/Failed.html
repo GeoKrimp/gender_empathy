@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% block content %}
+     <style>
+  .exp-wrap{ max-width: 900px; margin: 0 auto; }
+  .exp-card{
+    background:#fff; border-radius:16px; padding:24px 28px;
+    box-shadow:0 12px 30px rgba(15,23,42,0.12);
+    border:1px solid #e5e7eb;
+  }
+  .q-block{ margin: 18px 0 26px 0; }
+  .q-title{ margin-bottom: 8px; }
+  .scale-row{
+    display:flex; justify-content:space-between; font-size:0.9em; color:#6b7280;
+    margin-top: 6px;
+  }
+</style>
+<div class="exp-card">
+<h2>Task Closed</h2>
+
+<p>
+One or more comprehension questions were answered incorrectly. The task is now closed automatically and no completion code will be provided.
+</p>
+</div>
+{% endblock %}

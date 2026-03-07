@@ -1,65 +1,27 @@
 {% extends "global/Page.html" %}
 {% block content %}
-<style>
+     <style>
+  .exp-wrap{ max-width: 900px; margin: 0 auto; }
   .exp-card{
-    max-width: 900px;
-    margin: 2rem auto;
-    background: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 18px 40px rgba(15,23,42,.08);
-    padding: 24px 28px;
+    background:#fff; border-radius:16px; padding:24px 28px;
+    box-shadow:0 12px 30px rgba(15,23,42,0.12);
+    border:1px solid #e5e7eb;
+  }
+  .q-block{ margin: 18px 0 26px 0; }
+  .q-title{ margin-bottom: 8px; }
+  .scale-row{
+    display:flex; justify-content:space-between; font-size:0.9em; color:#6b7280;
+    margin-top: 6px;
   }
 </style>
-    <div class="exp-card">
+<div class="exp-card">
 <h2>Decision</h2>
 
-{# --- Πληροφορία για τον αποδέκτη ανά treatment --- #}
-
-{% if player.empathy_condition == 'no_empathy' %}
-
-  <p>
-    You are paired with another participant who will be the recipient
-    of your decision.
-  </p>
-
-{% else %}
-
-  {% if player.receiver_gender == 'man' %}
-    <p>
-      You are paired with another participant.
-      The other participant is a <strong>man</strong> and will be the
-      recipient of your decision.
-    </p>
-  {% elif player.receiver_gender == 'woman' %}
-    <p>
-      You are paired with another participant.
-      The other participant is a <strong>woman</strong> and will be the
-      recipient of your decision.
-    </p>
-  {% else %}
-    {# Αν για κάποιο λόγο δεν έχεις setάρει gender, απλά δεν το αναφέρουμε #}
-    <p>
-      You are paired with another participant who will be the recipient
-      of your decision.
-    </p>
-  {% endif %}
-
-{% endif %}
-
-<p>
-  You have <strong>{{ Constants.endowment }}</strong> tokens.
-  You can decide how many of these tokens to keep for yourself and
-  how many to give to the recipient.
-</p>
-
-<p>
-  Any tokens you give will be transferred to the recipient.
-  Any tokens you keep will remain yours.
-</p>
+<p><strong>How much do you want to transfer to the other participant?</strong></p>
 
 <div style="margin: 20px 0;">
   <label for="donation_slider">
-    You give: <strong><span id="donation_value">0</span></strong> tokens
+    You transfer: <strong><span id="donation_value">0</span> cents</strong>
   </label>
 
   <input
@@ -67,15 +29,19 @@
     id="donation_slider"
     name="donation"
     min="0"
-    max="{{ Constants.endowment }}"
+    max="20"
     value="0"
-    step="1"
+    step="0.5"
     style="width: 100%;"
     oninput="document.getElementById('donation_value').textContent = this.value;"
   >
+
+  <div style="display:flex; justify-content:space-between; font-size:0.9em;">
+      <span>0 cents</span>
+      <span>20 cents</span>
+  </div>
 </div>
 
 {% next_button %}
-    </div>
+</div>
 {% endblock %}
-

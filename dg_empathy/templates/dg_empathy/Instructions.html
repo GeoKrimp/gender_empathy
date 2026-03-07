@@ -1,28 +1,40 @@
 {% extends "global/Page.html" %}
 {% block content %}
-<style>
+ <style>
+  .exp-wrap{ max-width: 900px; margin: 0 auto; }
   .exp-card{
-    max-width: 900px;
-    margin: 2rem auto;
-    background: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 18px 40px rgba(15,23,42,.08);
-    padding: 24px 28px;
+    background:#fff; border-radius:16px; padding:24px 28px;
+    box-shadow:0 12px 30px rgba(15,23,42,0.12);
+    border:1px solid #e5e7eb;
+  }
+  .q-block{ margin: 18px 0 26px 0; }
+  .q-title{ margin-bottom: 8px; }
+  .scale-row{
+    display:flex; justify-content:space-between; font-size:0.9em; color:#6b7280;
+    margin-top: 6px;
   }
 </style>
-    <div class="exp-card">
+
+
+<div class="exp-card">
 <h2>Instructions</h2>
 
 <p>
-You will participate in a short decision-making task.
-You will receive an initial endowment of {{ Constants.endowment }} tokens.
-You may decide how many tokens, if any, to give to another participant.
+This is the second part of the task. You are now paired with another participant.
+Your earnings in this part depend only on the decision you make.
 </p>
 
 <p>
-Your decisions are anonymous and will affect real payments.
+You have been provisionally allocated <strong>20 cents</strong>, while the other participant has been allocated nothing.
+You must decide how much, if any, of your 20 cents you would like to transfer to the other participant.
+You may transfer any amount between 0 and 20 cents.
+</p>
+
+<p>
+The other participant has no decision to make, is a real person, and will receive exactly the amount you choose to transfer.
+No deception is used in this study. The amount you decide to keep will be added to the payment you have already earned for completing the survey.
 </p>
 
 {% next_button %}
-    </div>
+</div>
 {% endblock %}

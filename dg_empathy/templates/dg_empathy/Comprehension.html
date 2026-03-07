@@ -1,0 +1,107 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}Comprehension Questions{% endblock %}
+
+{% block content %}
+
+<style>
+  .welcome-wrap{ max-width: 900px; margin: 0 auto; }
+  .welcome-card{
+    background:#fff; border-radius:16px; padding:24px 28px;
+    box-shadow:0 12px 30px rgba(15,23,42,0.12);
+    border:1px solid #e5e7eb;
+  }
+  .q-block{ margin: 18px 0 26px 0; }
+  .q-title{ margin-bottom: 8px; }
+  .scale-row{
+    display:flex; justify-content:space-between; font-size:0.9em; color:#6b7280;
+    margin-top: 6px;
+  }
+</style>
+
+<div class="welcome-wrap">
+  <div class="welcome-card">
+
+    <h2>Comprehension Questions</h2>
+
+    <p>
+      We will now ask you two short questions to confirm that you have understood the decision problem.
+      Please answer carefully.
+    </p>
+
+    <p>
+      In this task, you have been allocated <strong>20 cents</strong> and the other participant has been allocated <strong>0 cents</strong>.
+      Any amount you transfer to the other participant will be deducted from your own 20 cents and added to the other participant’s earnings.
+    </p>
+
+    <p>
+      This means that:
+      if you want to maximize <strong>your own income</strong>, you should transfer as little as possible;
+      if you want to maximize <strong>the other participant’s income</strong>, you should transfer as much as possible.
+    </p>
+
+    <p>
+      If the questions are answered incorrectly, the task will close automatically and no completion code will be provided.
+    </p>
+
+    <div class="q-block">
+      <div class="q-title">
+        <strong>How much should you transfer to the other participant to maximize your income?</strong>
+      </div>
+
+      <label for="comp_self_slider">
+        Your answer: <strong><span id="comp_self_val">0</span> cents</strong>
+      </label>
+
+      <input
+        type="range"
+        id="comp_self_slider"
+        name="comp_self"
+        min="0"
+        max="20"
+        value="0"
+        step="0.5"
+        style="width:100%;"
+        oninput="document.getElementById('comp_self_val').textContent=this.value;"
+      >
+
+      <div class="scale-row">
+        <span>0</span><span>20</span>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-title">
+        <strong>How much should you transfer to maximize the other participant’s income?</strong>
+      </div>
+
+      <label for="comp_other_slider">
+        Your answer: <strong><span id="comp_other_val">0</span> cents</strong>
+      </label>
+
+      <input
+        type="range"
+        id="comp_other_slider"
+        name="comp_other"
+        min="0"
+        max="20"
+        value="0"
+        step="0.5"
+        style="width:100%;"
+        oninput="document.getElementById('comp_other_val').textContent=this.value;"
+      >
+
+      <div class="scale-row">
+        <span>0</span><span>20</span>
+      </div>
+    </div>
+
+    <p>
+      {{ next_button }}
+    </p>
+
+  </div>
+</div>
+
+{% endblock %}
