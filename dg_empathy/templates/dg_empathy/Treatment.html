@@ -17,11 +17,11 @@
 <div class="exp-card">
 
 {% if player.receiver_gender == 'man' %}
-  <p>It is now time to make your real choice. The system paired you with a <strong>male participant (Person B)</strong>.</p>
+  <p>It is now time to make your real choice. The system paired you with a <strong><u>male</u> participant (Person B)</strong>.</p>
 {% elif player.receiver_gender == 'woman' %}
-  <p>It is now time to make your real choice. The system paired you with a <strong>female participant (Person B)</strong>.</p>
+  <p>It is now time to make your real choice. The system paired you with a <strong><u>female</u> participant (Person B)</strong>.</p>
 {% else %}
-  <p>It is now time to make your real choice. The system paired you with <strong>another participant (Person B)</strong>.</p>
+  <p>It is now time to make your real choice. The system paired you with <strong><u>another participant</u> (Person B)</strong>.</p>
 {% endif %}
 
 {% if player.empathy_condition == 'ai' or player.empathy_condition == 'human' %}
