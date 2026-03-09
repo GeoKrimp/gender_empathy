@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+
+{% block content %}
+
+<style>
+  .welcome-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .welcome-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    border: 1px solid #e5e7eb;
+  }
+</style>
+
+<div class="welcome-wrap">
+  <div class="welcome-card">
+
+    <h2>Worker ID</h2>
+
+    <p>
+      Please enter your Mechanical Turk Worker ID.
+    </p>
+
+    {{ formfields }}
+
+    {{ next_button }}
+
+  </div>
+</div>
+
+{% endblock %}

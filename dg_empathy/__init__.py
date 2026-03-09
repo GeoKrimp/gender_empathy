@@ -32,6 +32,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+
     empathy_condition = models.StringField()
     receiver_gender = models.StringField()
 
