@@ -31,7 +31,6 @@ ROOMS = [
     dict(
         name='experiment',
         display_name='Empathy Experiment',
-        participant_label_file=None,
     ),
 ]
 
