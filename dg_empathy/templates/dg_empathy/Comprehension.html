@@ -1,21 +1,33 @@
 {% extends "global/Page.html" %}
-{% load otree %}
-
-{% block title %}Comprehension Questions{% endblock %}
-
 {% block content %}
 
 <style>
-  .welcome-wrap{ max-width: 900px; margin: 0 auto; }
-  .welcome-card{
-    background:#fff; border-radius:16px; padding:24px 28px;
-    box-shadow:0 12px 30px rgba(15,23,42,0.12);
-    border:1px solid #e5e7eb;
+  .welcome-wrap {
+    max-width: 900px;
+    margin: 0 auto;
   }
-  .q-block{ margin: 18px 0 26px 0; }
-  .q-title{ margin-bottom: 8px; }
-  .scale-row{
-    display:flex; justify-content:space-between; font-size:0.9em; color:#6b7280;
+
+  .welcome-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    border: 1px solid #e5e7eb;
+  }
+
+  .q-block {
+    margin: 18px 0 26px 0;
+  }
+
+  .q-title {
+    margin-bottom: 8px;
+  }
+
+  .scale-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #6b7280;
     margin-top: 6px;
   }
 </style>
@@ -42,9 +54,12 @@
     </p>
 
     <p>
-      If the questions are answered incorrectly, the task will close automatically and no completion code will be provided.
+      If the questions are answered incorrectly, the task will end automatically.
     </p>
-
+    <p style="color: #b91c1c; font-weight: 500;">
+      Please make sure to move each slider at least once, even if your answer is 0.
+      Otherwise, you will not be able to proceed.
+    </p>
     <div class="q-block">
       <div class="q-title">
         <strong>How much should you transfer to the other participant to maximize your income?</strong>
@@ -63,11 +78,11 @@
         value="0"
         step="0.5"
         style="width:100%;"
-        oninput="document.getElementById('comp_self_val').textContent=this.value;"
       >
 
       <div class="scale-row">
-        <span>0</span><span>20</span>
+        <span>0</span>
+        <span>20</span>
       </div>
     </div>
 
@@ -89,19 +104,45 @@
         value="0"
         step="0.5"
         style="width:100%;"
-        oninput="document.getElementById('comp_other_val').textContent=this.value;"
       >
 
       <div class="scale-row">
-        <span>0</span><span>20</span>
+        <span>0</span>
+        <span>20</span>
       </div>
     </div>
 
-    <p>
-      {{ next_button }}
-    </p>
+    <button class="otree-btn-next btn btn-primary" id="next-btn" disabled>
+      Next
+    </button>
 
   </div>
 </div>
+
+<script>
+  let moved1 = false;
+  let moved2 = false;
+
+  const nextBtn = document.getElementById('next-btn');
+
+  const slider1 = document.getElementById('comp_self_slider');
+  const slider2 = document.getElementById('comp_other_slider');
+
+  slider1.addEventListener('input', function () {
+    document.getElementById('comp_self_val').textContent = this.value;
+    moved1 = true;
+    if (moved1 && moved2) {
+      nextBtn.disabled = false;
+    }
+  });
+
+  slider2.addEventListener('input', function () {
+    document.getElementById('comp_other_val').textContent = this.value;
+    moved2 = true;
+    if (moved1 && moved2) {
+      nextBtn.disabled = false;
+    }
+  });
+</script>
 
 {% endblock %}

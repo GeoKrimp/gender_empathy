@@ -10,15 +10,15 @@ class Constants(BaseConstants):
     belief_bonus_cents = 20  # 0.20$
 
     treatments = [
-        ('no', 'none'),
-        ('no', 'man'),
-        ('no', 'woman'),
-        ('ai', 'none'),
-        ('ai', 'man'),
-        ('ai', 'woman'),
-        ('human', 'none'),
-        ('human', 'man'),
-        ('human', 'woman'),
+        (1, 'no', 'none'),
+        (2, 'no', 'man'),
+        (3, 'no', 'woman'),
+        (4, 'ai', 'none'),
+        (5, 'ai', 'man'),
+        (6, 'ai', 'woman'),
+        (7, 'human', 'none'),
+        (8, 'human', 'man'),
+        (9, 'human', 'woman'),
     ]
 
 
@@ -35,6 +35,7 @@ class Player(BasePlayer):
 
     empathy_condition = models.StringField()
     receiver_gender = models.StringField()
+    treatment_id = models.IntegerField()
 
     failed_comprehension = models.BooleanField(initial=False)
 
@@ -61,9 +62,9 @@ class Player(BasePlayer):
 
 
 def creating_session(subsession: Subsession):
-    # Round-robin balanced assignment μέσα στο session
     for i, p in enumerate(subsession.get_players()):
-        empathy, gender = Constants.treatments[i % len(Constants.treatments)]
+        treatment_id, empathy, gender = Constants.treatments[i % len(Constants.treatments)]
+        p.treatment_id = treatment_id
         p.empathy_condition = empathy
         p.receiver_gender = gender
 
@@ -79,15 +80,9 @@ class Comprehension(Page):
     form_fields = ['comp_self', 'comp_other']
 
     @staticmethod
-    def error_message(player: Player, values):
-        a = float(values['comp_self'])
-        b = float(values['comp_other'])
-
-        ok = (abs(a - 0.0) < 1e-9) and (abs(b - Constants.endowment_cents) < 1e-9)
-        player.failed_comprehension = not ok
-
-        if not ok:
-            return "One or more answers are incorrect."
+    def before_next_page(player, timeout_happened):
+        correct = (player.comp_self == 0) and (player.comp_other == Constants.endowment_cents)
+        player.failed_comprehension = not correct
 
 class Failed(Page):
     @staticmethod
@@ -97,7 +92,7 @@ class Failed(Page):
 
 class Treatment(Page):
     @staticmethod
-    def is_displayed(player: Player):
+    def is_displayed(player):
         return not player.failed_comprehension
 
 
@@ -106,7 +101,7 @@ class DictatorDecision(Page):
     form_fields = ['donation']
 
     @staticmethod
-    def is_displayed(player: Player):
+    def is_displayed(player):
         return not player.failed_comprehension
 
 
@@ -115,7 +110,7 @@ class Belief(Page):
     form_fields = ['belief_avg']
 
     @staticmethod
-    def is_displayed(player: Player):
+    def is_displayed(player):
         return not player.failed_comprehension
 
 

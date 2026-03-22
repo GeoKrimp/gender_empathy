@@ -15,8 +15,16 @@
   }
 </style>
 <div class="exp-card">
+ {% if player.failed_comprehension %}
+      <h2>End Task</h2>
+      <p>
+        You did not answer the comprehension questions correctly.
+        The task has now ended.
+      </p>
+    {% else %}
 <h2>End Task</h2>
 
     <p>Thank you for your participation the <b>payment code</b> is <b>344164</b></p>
-
+    {% endif %}
+</div>
 {% endblock %}

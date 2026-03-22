@@ -1,49 +1,84 @@
 {% extends "global/Page.html" %}
 {% block content %}
-     <style>
-  .exp-wrap{ max-width: 900px; margin: 0 auto; }
-  .exp-card{
-    background:#fff; border-radius:16px; padding:24px 28px;
-    box-shadow:0 12px 30px rgba(15,23,42,0.12);
-    border:1px solid #e5e7eb;
+
+<style>
+  .welcome-wrap {
+    max-width: 900px;
+    margin: 0 auto;
   }
-  .q-block{ margin: 18px 0 26px 0; }
-  .q-title{ margin-bottom: 8px; }
-  .scale-row{
-    display:flex; justify-content:space-between; font-size:0.9em; color:#6b7280;
+
+  .welcome-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    border: 1px solid #e5e7eb;
+  }
+
+  .scale-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #6b7280;
     margin-top: 6px;
   }
 </style>
-<div class="exp-card">
-<h2>Final Question</h2>
 
-<p>
-This is the final part of the task. In this section, we ask you to make a guess:
-what do you think is the average amount that Person A will transfer to Person B in the same situation you just participated in, across all other pairs of participants in the study?
-If you guess correctly you will receive an additional <strong>20 cents</strong> bonus.
+<div class="welcome-wrap">
+  <div class="welcome-card">
+
+    <h2>Final Question</h2>
+
+    <p>
+      This is the final part of the task. In this section, we ask you to make a guess:
+      what do you think is the average amount that Person A will transfer to Person B
+      in the same situation you just participated in, across all other pairs of participants
+      in the study?
+    </p>
+
+    <p>
+      If you guess correctly you will receive an additional <strong>0.20 dollars</strong> bonus.
+    </p>
+<p style="color: #b91c1c; font-weight: 500;">
+  Please move the slider at least once to confirm your answer, even if your guess is 0.
 </p>
+    <label for="belief_slider">
+      Your guess: <strong><span id="belief_value">0</span> cents</strong>
+    </label>
 
-<label for="belief_slider">
-  Your guess: <strong><span id="belief_value">0</span> cents</strong>
-</label>
+    <input
+      type="range"
+      id="belief_slider"
+      name="belief_avg"
+      min="0"
+      max="20"
+      value="0"
+      step="0.5"
+      style="width: 100%;"
+    >
 
-<input
-  type="range"
-  id="belief_slider"
-  name="belief_avg"
-  min="0"
-  max="20"
-  value="0"
-  step="0.5"
-  style="width: 100%;"
-  oninput="document.getElementById('belief_value').textContent = this.value;"
->
+    <div class="scale-row">
+      <span>0 cents</span>
+      <span>20 cents</span>
+    </div>
 
-<div style="display:flex; justify-content:space-between; font-size:0.9em;">
-  <span>0 cents</span>
-  <span>20 cents</span>
+    <br>
+
+    <button class="otree-btn-next btn btn-primary" id="next-btn" disabled>
+      End Task
+    </button>
+
+  </div>
 </div>
 
-{% next_button %}
-</div>
+<script>
+  const slider = document.getElementById('belief_slider');
+  const nextBtn = document.getElementById('next-btn');
+
+  slider.addEventListener('input', function () {
+    document.getElementById('belief_value').textContent = this.value;
+    nextBtn.disabled = false;
+  });
+</script>
+
 {% endblock %}
